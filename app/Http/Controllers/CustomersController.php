@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Imports\CustomersImport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
 
 class CustomersController extends Controller
 {
@@ -15,7 +18,7 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        $customers = Customer::all()->sortByDesc('money_spent');
+        $customers = Customer::paginate(20);
         return view('customers.index', compact('customers'));
     }
 
@@ -38,12 +41,13 @@ class CustomersController extends Controller
     public function store(Request $request)
     {
         $attributes = request()->validate([
-            'firstname' => ['required', 'min:3'],
-            'lastname' => ['required', 'min:3'],
+            'opstina' => ['required', 'min:3'],
+            'name' => ['required', 'min:3'],
+            'number_of_rent' => [],
             'phone_number' => ['required', 'min:9'],
             'address' => ['required', 'min:3'],
             'money_spent' => ['required'],
-            'coment' => ['required', 'min:3']
+            'comment' => ['required', 'min:3']
         ]);
 
         Customer::create($attributes);
@@ -82,7 +86,9 @@ class CustomersController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        $customer->update(request(['name','opstina','phone_number','address','comment','number_of_rent','money_spent']));
+
+        return redirect('/customers');
     }
 
     /**
@@ -93,13 +99,32 @@ class CustomersController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        $customer->delete();
+        return redirect('/customers');
     }
     public function search(Request $request)
     {
         $search = $request->get('search');
-        $customers = DB::table('customers')->where('firstname','like', '%'.$search.'%')->paginate(5);
+        $customers = DB::table('customers')->where('phone_number','like', '%'.$search.'%')->paginate(20);
         return view('customers.index', ['customers' => $customers]);
+    }
+    public function searchNumber(Request $request)
+    {
+        $search = $request->get('searchNumber');
+        $customers = DB::table('customers')->where('phone_number','like', '%'.$search.'%')->paginate(20);
+        return view('sonies.edit', ['customers' => $customers]);
+    }
+    public function searchId(Request $request)
+    {
+        $search = $request->get('search');
+        $customers = DB::table('customers')->where('name','like', '%'.$search.'%')->paginate(20);
+        return view('customers.index', ['customers' => $customers]);
+    }
+    public function import() 
+    {
+        Excel::import(new CustomersImport, 'customers.xlsx');
+        
+        return redirect('/')->with('success', 'All good!');
     }
     
 }

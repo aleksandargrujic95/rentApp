@@ -117,7 +117,6 @@ class SoniesController extends Controller
         $sony->customer->update(['money_spent' => $money_spent]);
 
          DB::table('customers')->where('id', 1)->update(['money_spent' => 0]);
-         dd($diff_days);
          return redirect('/sonies');
     }
 

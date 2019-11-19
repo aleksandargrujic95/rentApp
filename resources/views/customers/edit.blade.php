@@ -2,14 +2,15 @@
 
 @section('content')
 	<h1>Dodaj korisnika</h1>
-	<form action="/customers" method="POST" role="form" style="width: 90%; margin-bottom: 10px;">
+	<form action="/customers/{{ $customer->id }}" method="POST" role="form" style="width: 90%; margin-bottom: 10px;">
+		@method('PATCH')
 		@csrf
 	
 		<div class="form-group">
 			<label for="title">Ime</label>
 			<input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' :  ''}}" id="name" name="name" value="{{ old('name') }}" required>
 			<label for="title">Opstina</label>
-			<input type="text" class="form-control {{ $errors->has('lastname') ? 'is-invalid' :  ''}}" id="opstina" name="opstina" value="{{ old('opstina') }}" required>
+			<input type="text" class="form-control {{ $errors->has('opstina') ? 'is-invalid' :  ''}}" id="opstina" name="opstina" value="{{ old('opstina') }}" required>
 			<label for="title">Broj telefona</label>
 			<input type="text" class="form-control {{ $errors->has('phone_number') ? 'is-invalid' :  ''}}" id="phone_number" name="phone_number" value="{{ old('phone_number') }}" required>
 			<label for="title">Adresa</label>
@@ -19,9 +20,9 @@
 			<label for="title">Broj iznajmljivanja</label>
 			<input type="text" class="form-control"  name="number_of_rent" required>
 			<label for="title">Komentar</label>
-			<input type="text" class="form-control {{ $errors->has('coment') ? 'is-invalid' :  ''}}" id="coment" name="comment" value="{{ old('coment') }}" required>
+			<input type="text" class="form-control {{ $errors->has('comment') ? 'is-invalid' :  ''}}" id="comment" name="comment" value="{{ old('comment') }}" required>
 		</div>
-		<button type="submit" class="btn btn-primary">Napravi korisnika</button>
+		<button type="submit" class="btn btn-primary">Sacuvaj izmene</button>
 		@include('errors')
 	</form>
 @endsection

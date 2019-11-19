@@ -9,7 +9,7 @@ $today = Carbon::now();
 <br><br>
 <div class="row">
 	<div class="col-sm">
-		
+		<a href="/" class="btn btn-danger" style="background: #FF5852; border-color: #FF5852;">Pocetna</a>
 	</div>
 	<div class="col-sm">
 		
@@ -39,18 +39,14 @@ $today = Carbon::now();
     </div>
     </div>
  </div>
-    @foreach($sonies as $sony)
-    <?php
-    $DeferenceInDays = Carbon::parse($today)->diffInDays($sony->date_of_giveback);
-    ?>
- 
+    @foreach($sonies as $sony) 
     	@if($sony->customer_id !== 1 && $sony->date_of_giveback >= $today)
 		    <div class="row" style="background: #262C3A; margin-bottom: 5px; padding: 10px 0; border: 1px solid #FF5852;border-radius: 4px; color: #fff;">
 			    <div class="col-sm">
 			    	<a href="/sonies/{{$sony->id}}/edit">{{$sony->name}}</a>
 			    </div>
 			    <div class="col-sm">
-			    	<a href="/customers/{{$sony->customer->id}}">{{$sony->customer->firstname}} {{$sony->customer->lastname}}</a>
+			    	<a href="/customers/{{$sony->customer->id}}">{{$sony->customer->name}}</a>
 			    </div>
 			    <div class="col-sm">
 			      {{$sony->joystick}}
@@ -65,7 +61,7 @@ $today = Carbon::now();
  	@else
  	 	<div class="row" style="background: #93C2FA; margin-bottom: 5px; padding: 10px 0; border: 2px solid #262C3A; border-radius: 4px;">
 			<div class="col">
-			   	<a href="/sonies/{{$sony->id}}">{{$sony->name}}</a>
+			   	<p>{{$sony->name}}</p>
 			</div>	
 			<div class="col">
 			   	<p>Na stanju</p>
