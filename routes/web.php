@@ -22,6 +22,7 @@ Route::resource('customers', 'CustomersController');
 
 
 Route::get('search', 'CustomersController@search');
+Route::get('searchJbk', 'CustomersController@searchJbk');
 Route::get('searchNumber', 'CustomersController@searchNumber');
 
 Route::post('/projects/{project}/tasks', 'ProjectTasksController@store');

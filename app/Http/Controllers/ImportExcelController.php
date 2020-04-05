@@ -24,6 +24,8 @@ class ImportExcelController extends Controller
     			foreach ($value as $row) {
     				if($row['name'])
     				$insert_data[] = array(
+						'jbk'  => row['jbk'],
+						'konzola'  => row['Konzola'],
     					'opstina' => row['Opština'],
     					'address' => row['Adresa'],
     					'name' => row['Ime I prezime'],

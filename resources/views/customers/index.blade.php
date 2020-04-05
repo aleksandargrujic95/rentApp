@@ -19,11 +19,22 @@
 				</div>
 			</form>
 		</div>
+		<div class="col-sm">
+			<form action="/searchJbk" method="get">
+				<div class="input-group">
+					<input type="search" name="searchJbk" class="form-control">
+					<span class="input-group-prepend">
+						<button type="submit" class="btn btn-primary">Search JBK</button>
+					</span>
+				</div>
+			</form>
+		</div>
 	</div>
 	  <table class="table">
 	  <thead class="thead-dark">
 	    <tr>
-	      <th scope="col">#</th>
+		  <th scope="col">#</th>
+		  <th scope="col">JBK:</th>
 	      <th scope="col">Ime:</th>
 	      <th scope="col">Opstina:</th>
 	      <th scope="col">Telefon:</th>
@@ -44,23 +55,27 @@
 		  		$i++;
 		  	?>
 			<tr>
-		      <th scope="row">{{$i}}</th>
+			  <th scope="row">{{$i}}</th>
+			  <td>{{ $customer->jbk }}</td>
 		      <td>{{ $customer->name }}</td>
 		      <td>{{ $customer->opstina }}</td>
 		      <td>{{ $customer->phone_number }}</td>
 		      <td>{{ $customer->address }}</td>
 		      <td>{{ $customer->comment }}</td>
 		      <td>{{ $customer->number_of_rent }}</td>
-		      <td>{{ $customer->money_spent }}</td>
+		      <td>{{ $customer->money_spent }} din</td>
 		      <td>
 		      	<form method="POST" action="/customers/{{ $customer->id }}">
 					@method('DELETE')
 					@csrf
-					<button style="background:#d11a2a;border-color:#d11a2a;" type="submit"><img src="http://simpleicon.com/wp-content/uploads/remove-user.png" alt="" style="width:29px; cursor:poiner;"></button>
+					<button type="submit" class="delete-btn"><i class="fas fa-user-times"></i></button>
 				</form>
 			  </td>
 			  <td>
-				  <a href="/customers/{{ $customer->id }}" ><button style="background:#Fff;border-color:#Fff;" type="submit"><img src="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/edit-user.png" alt="" style="width:29px; cursor:poiner;"></button></a>
+				<form method="GET" action="/customers/{{ $customer->id }}">
+					@csrf
+					<button type="submit" class="submit-btn"><i class="fas fa-user-edit"></i></button>
+				</form>
 			  </td>
 		    </tr>
 		@endforeach	   

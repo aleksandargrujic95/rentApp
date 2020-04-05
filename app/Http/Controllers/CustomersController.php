@@ -114,10 +114,10 @@ class CustomersController extends Controller
         $customers = DB::table('customers')->where('phone_number','like', '%'.$search.'%')->paginate(20);
         return view('sonies.edit', ['customers' => $customers]);
     }
-    public function searchId(Request $request)
+    public function searchJbk(Request $request)
     {
-        $search = $request->get('search');
-        $customers = DB::table('customers')->where('name','like', '%'.$search.'%')->paginate(20);
+        $search = $request->get('searchJbk');
+        $customers = DB::table('customers')->where('jbk','like', '%'.$search.'%')->paginate(20);
         return view('customers.index', ['customers' => $customers]);
     }
     public function import() 

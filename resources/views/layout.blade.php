@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="bootstrap.bundle.min.js">
-    <link rel="stylesheet" href="bootstrap.bundle.js">
+	<link rel="stylesheet" href="bootstrap.bundle.js">
+	<link rel="stylesheet" href="custom.css">
 </head>
 <body>
 	<div class="container-fluid" style=" margin: auto;">
